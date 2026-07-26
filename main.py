@@ -5,7 +5,10 @@ def main():
 
     target = input("Enter Target: ")
     
-    print (target)
+    if len(target) == 0:
+      print ("[-]Error: Target cannot be empty.")
+    else:
+      print ("[+] Target Accepted:", target)
 
 
 if __name__ == "__main__":
