@@ -3,7 +3,7 @@ import socket
 
 def main():
     print("=" * 50)
-    print("      NETWORK RECON TOOLKIT v1.3")
+    print("      NETWORK RECON TOOLKIT v1.4")
     print("=" * 50)
 
     target = input("Enter Target: ")
@@ -17,6 +17,20 @@ def main():
         try:
             ip = socket.gethostbyname(target)
             print("[+] IP Address:", ip)
+
+            port = int(input("Enter Port: "))
+
+            s = socket.socket()
+
+            s.settimeout(3)
+            result = s.connect_ex((ip,port))
+
+            s.close()
+            if result == 0:
+                print ("[+] Port", port,"is OPEN ")
+
+            else:
+                print ("[-] Port", port,"is  CLOSED")
 
         except socket.gaierror:
             print("[-] Unable to resolve domain.")
