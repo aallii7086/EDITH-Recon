@@ -1,5 +1,18 @@
 import socket
 
+services = {
+    21: "FTP",
+    22: "SSH",
+    25: "SMTP",
+    53: "DNS",
+    80: "HTTP",
+    110: "POP3",
+    143: "IMAP",
+    443: "HTTPS",
+    3306: "MySQL",
+    3389: "RDP"
+}
+
 def main():
     print("=" * 50)
     print("      NETWORK RECON TOOLKIT v1.4")
@@ -19,7 +32,7 @@ def main():
 
             for port in range(22, 81):
                 s = socket.socket()
-                s.settimeout(1)
+                s.settimeout(3)
 
                 result = s.connect_ex((ip, port))
 
@@ -28,7 +41,8 @@ def main():
                # print(f"Port {port} -> Result = {result}")
 
                 if result == 0:
-                    print(f"[+] Port {port} is OPEN")
+                    service = services.get(port,"UNKNOWN")
+                    print(f"[+] Port {port}/tcp OPEN ({service})")
 
         except socket.gaierror:
             print("[-] Unable to resolve domain.")
