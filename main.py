@@ -1,6 +1,5 @@
 import socket
 
-
 def main():
     print("=" * 50)
     print("      NETWORK RECON TOOLKIT v1.4")
@@ -18,19 +17,20 @@ def main():
             ip = socket.gethostbyname(target)
             print("[+] IP Address:", ip)
 
-            port = int(input("Enter Port: "))
+            for port in range(22, 81):
+                s = socket.socket()
+                s.settimeout(1)
 
-            s = socket.socket()
+                result = s.connect_ex((ip, port))
 
-            s.settimeout(3)
-            result = s.connect_ex((ip,port))
+                s.close()
 
-            s.close()
-            if result == 0:
-                print ("[+] Port", port,"is OPEN ")
+                print(f"POrt {port} -> Result = {result}")
 
-            else:
-                print ("[-] Port", port,"is  CLOSED")
+                if result == 0:
+                    print("[+] Port", port, "is OPEN")
+                else:
+                    print("[-] Port", port, "is CLOSED")
 
         except socket.gaierror:
             print("[-] Unable to resolve domain.")
