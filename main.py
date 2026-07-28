@@ -25,12 +25,10 @@ def main():
 
                 s.close()
 
-                print(f"POrt {port} -> Result = {result}")
+               # print(f"Port {port} -> Result = {result}")
 
                 if result == 0:
-                    print("[+] Port", port, "is OPEN")
-                else:
-                    print("[-] Port", port, "is CLOSED")
+                    print(f"[+] Port {port} is OPEN")
 
         except socket.gaierror:
             print("[-] Unable to resolve domain.")
