@@ -30,6 +30,13 @@ def main():
     try:
         ip = socket.gethostbyname(target)
         print(f"[+] IP Address: {ip}\n")
+       
+        try:
+            hostname = socket.gethostbyaddr(ip)[0]
+            print(f"[+] Hostname: {hostname}\n")
+
+        except socket.herror:
+            print("[-] Reverse DNS record not found.\n")
 
         for port in range(22, 81):
 
