@@ -1,3 +1,4 @@
+import whois
 import socket
 
 services = {
@@ -30,13 +31,23 @@ def main():
     try:
         ip = socket.gethostbyname(target)
         print(f"[+] IP Address: {ip}\n")
-       
+
         try:
             hostname = socket.gethostbyaddr(ip)[0]
             print(f"[+] Hostname: {hostname}\n")
 
         except socket.herror:
             print("[-] Reverse DNS record not found.\n")
+
+        try:
+            domain_info = whois.whois(target)
+            print("\n========== WHOIS ==========")
+            print(f"Registrar: {domain_info.get('registrar')}")
+            print(f"Creation Date: {domain_info.get('creation_date')}")
+            print(f"Expiration Date: {domain_info.get('expiration_date')}")
+
+        except Exception:
+            print("[-] WHOIS lookup failed.\n")
 
         for port in range(22, 81):
 
