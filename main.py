@@ -44,6 +44,13 @@ def main():
 
     print(f"[+] Target Accepted: {target}")
 
+
+    report_path = f"reports/{target}_report.txt"
+    
+    with open(report_path, "w") as report:
+        report.write("NETWORK RECON TOOLKIT REPORT\n")
+        report.write("=" * 40 + "\n")
+
     try:
         ip = socket.gethostbyname(target)
         print(f"[+] IP Address: {ip}\n")
