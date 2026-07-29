@@ -16,11 +16,21 @@ services = {
 }
 
 
+def format_date(date_value):
+    if isinstance(date_value, list):
+        date_value = date_value[0]
+
+    if date_value:
+        return str(date_value).split()[0]
+
+    return "Not Available"
+
+
 def main():
+
     print("=" * 50)
     print("      NETWORK RECON TOOLKIT v1.5")
     print("=" * 50)
-
 
     if len(sys.argv) < 2:
         print("Usage: python3 main.py <target>")
@@ -38,6 +48,7 @@ def main():
         ip = socket.gethostbyname(target)
         print(f"[+] IP Address: {ip}\n")
 
+        # Reverse DNS
         try:
             hostname = socket.gethostbyaddr(ip)[0]
             print(f"[+] Hostname: {hostname}\n")
@@ -45,16 +56,19 @@ def main():
         except socket.herror:
             print("[-] Reverse DNS record not found.\n")
 
+        # WHOIS
         try:
             domain_info = whois.whois(target)
+
             print("\n========== WHOIS ==========")
             print(f"Registrar: {domain_info.get('registrar')}")
-            print(f"Creation Date: {domain_info.get('creation_date')}")
-            print(f"Expiration Date: {domain_info.get('expiration_date')}")
+            print(f"Creation Date: {format_date(domain_info.get('creation_date'))}")
+            print(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}")
 
         except Exception:
             print("[-] WHOIS lookup failed.\n")
 
+        # Port Scan
         for port in range(22, 81):
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -63,12 +77,15 @@ def main():
             result = s.connect_ex((ip, port))
 
             if result == 0:
+
                 service = services.get(port, "Unknown")
                 print(f"[+] Port {port}/tcp OPEN ({service})")
 
-                # Banner Grabbing (HTTP only)
+                # Banner Grabbing
                 if port == 80:
+
                     try:
+
                         request = (
                             f"GET / HTTP/1.1\r\n"
                             f"Host: {target}\r\n"
