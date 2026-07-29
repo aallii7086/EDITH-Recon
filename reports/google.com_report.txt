@@ -1,0 +1,21 @@
+NETWORK RECON TOOLKIT REPORT
+========================================
+
+Target: google.com
+
+IP Address: 142.250.67.46
+
+Hostname: pnmaaa-bb-in-f14.1e100.net
+
+========== WHOIS ==========
+Registrar: MarkMonitor, Inc.
+Creation Date: 1997-09-15
+Expiration Date: 2028-09-14
+
+[+] Port 80/tcp OPEN (HTTP)
+
+------ Banner ------
+HTTP/1.1 301 Moved Permanently
+Server: gws
+--------------------
+

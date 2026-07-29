@@ -32,11 +32,11 @@ def main():
     print("      NETWORK RECON TOOLKIT v1.5")
     print("=" * 50)
 
-    if len(sys.argv) < 2:
-        print("Usage: python3 main.py <target>")
-        sys.exit()
+    if len(sys.argv) >= 2:
+        target = sys.argv[1].strip()
 
-    target = sys.argv[1].strip()
+    else: 
+        target = input("Enter Target: ").strip()
 
     if not target:
         print("[-] Error: Target cannot be empty.")
