@@ -44,81 +44,104 @@ def main():
 
     print(f"[+] Target Accepted: {target}")
 
-
     report_path = f"reports/{target}_report.txt"
-    
+
     with open(report_path, "w") as report:
+
         report.write("NETWORK RECON TOOLKIT REPORT\n")
-        report.write("=" * 40 + "\n")
+        report.write("=" * 40 + "\n\n")
+        report.write(f"Target: {target}\n\n")
 
-    try:
-        ip = socket.gethostbyname(target)
-        print(f"[+] IP Address: {ip}\n")
-
-        # Reverse DNS
         try:
-            hostname = socket.gethostbyaddr(ip)[0]
-            print(f"[+] Hostname: {hostname}\n")
+            ip = socket.gethostbyname(target)
 
-        except socket.herror:
-            print("[-] Reverse DNS record not found.\n")
+            print(f"[+] IP Address: {ip}\n")
+            report.write(f"IP Address: {ip}\n\n")
 
-        # WHOIS
-        try:
-            domain_info = whois.whois(target)
+            # Reverse DNS
+            try:
+                hostname = socket.gethostbyaddr(ip)[0]
 
-            print("\n========== WHOIS ==========")
-            print(f"Registrar: {domain_info.get('registrar')}")
-            print(f"Creation Date: {format_date(domain_info.get('creation_date'))}")
-            print(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}")
+                print(f"[+] Hostname: {hostname}\n")
+                report.write(f"Hostname: {hostname}\n\n")
 
-        except Exception:
-            print("[-] WHOIS lookup failed.\n")
+            except socket.herror:
+                print("[-] Reverse DNS record not found.\n")
+                report.write("Hostname: Reverse DNS record not found\n\n")
 
-        # Port Scan
-        for port in range(22, 81):
+            # WHOIS
+            try:
+                domain_info = whois.whois(target)
 
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.settimeout(3)
+                print("========== WHOIS ==========")
+                print(f"Registrar: {domain_info.get('registrar')}")
+                print(f"Creation Date: {format_date(domain_info.get('creation_date'))}")
+                print(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}")
 
-            result = s.connect_ex((ip, port))
+                report.write("========== WHOIS ==========\n")
+                report.write(f"Registrar: {domain_info.get('registrar')}\n")
+                report.write(f"Creation Date: {format_date(domain_info.get('creation_date'))}\n")
+                report.write(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}\n\n")
 
-            if result == 0:
+            except Exception:
+                print("[-] WHOIS lookup failed.\n")
+                report.write("WHOIS lookup failed.\n\n")
 
-                service = services.get(port, "Unknown")
-                print(f"[+] Port {port}/tcp OPEN ({service})")
+            # Port Scan
+            for port in range(22, 81):
 
-                # Banner Grabbing
-                if port == 80:
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.settimeout(3)
 
-                    try:
+                result = s.connect_ex((ip, port))
 
-                        request = (
-                            f"GET / HTTP/1.1\r\n"
-                            f"Host: {target}\r\n"
-                            f"Connection: close\r\n\r\n"
-                        )
+                if result == 0:
 
-                        s.send(request.encode())
+                    service = services.get(port, "Unknown")
 
-                        banner = s.recv(1024).decode(errors="ignore")
+                    print(f"[+] Port {port}/tcp OPEN ({service})")
+                    report.write(f"[+] Port {port}/tcp OPEN ({service})\n")
 
-                        print("\n------ Banner ------")
-                        print(banner.split("\r\n")[0])
+                    # Banner Grabbing
+                    if port == 80:
 
-                        for line in banner.split("\r\n"):
-                            if line.lower().startswith("server:"):
-                                print(line)
+                        try:
 
-                        print("--------------------\n")
+                            request = (
+                                f"GET / HTTP/1.1\r\n"
+                                f"Host: {target}\r\n"
+                                f"Connection: close\r\n\r\n"
+                            )
 
-                    except Exception as e:
-                        print(f"[-] Banner grab failed: {e}")
+                            s.send(request.encode())
 
-            s.close()
+                            banner = s.recv(1024).decode(errors="ignore")
 
-    except socket.gaierror:
-        print("[-] Unable to resolve domain.")
+                            print("\n------ Banner ------")
+                            print(banner.split("\r\n")[0])
+
+                            report.write("\n------ Banner ------\n")
+                            report.write(banner.split("\r\n")[0] + "\n")
+
+                            for line in banner.split("\r\n"):
+                                if line.lower().startswith("server:"):
+                                    print(line)
+                                    report.write(line + "\n")
+
+                            print("--------------------\n")
+                            report.write("--------------------\n\n")
+
+                        except Exception as e:
+                            print(f"[-] Banner grab failed: {e}")
+                            report.write(f"Banner grab failed: {e}\n")
+
+                s.close()
+
+            print(f"\n[+] Report saved to: {report_path}")
+
+        except socket.gaierror:
+            print("[-] Unable to resolve domain.")
+            report.write("Unable to resolve domain.\n")
 
 
 if __name__ == "__main__":
