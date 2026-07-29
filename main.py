@@ -1,5 +1,6 @@
 import whois
 import socket
+import sys
 
 services = {
     21: "FTP",
@@ -20,7 +21,12 @@ def main():
     print("      NETWORK RECON TOOLKIT v1.5")
     print("=" * 50)
 
-    target = input("Enter Target: ").strip()
+
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <target>")
+        sys.exit()
+
+    target = sys.argv[1].strip()
 
     if not target:
         print("[-] Error: Target cannot be empty.")
