@@ -1,4 +1,4 @@
-NETWORK RECON TOOLKIT REPORT
+EDITH RECON REPORT
 ========================================
 
 Target: google.com
@@ -11,11 +11,4 @@ Hostname: pnmaaa-bb-in-f14.1e100.net
 Registrar: MarkMonitor, Inc.
 Creation Date: 1997-09-15
 Expiration Date: 2028-09-14
-
-[+] Port 80/tcp OPEN (HTTP)
-
------- Banner ------
-HTTP/1.1 301 Moved Permanently
-Server: gws
---------------------
 

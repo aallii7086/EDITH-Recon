@@ -1,4 +1,4 @@
-NETWORK RECON TOOLKIT REPORT
+EDITH RECON REPORT
 ========================================
 
 Target: scanme.nmap.org

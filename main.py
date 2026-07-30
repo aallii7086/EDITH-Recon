@@ -2,6 +2,9 @@ import whois
 import socket
 import sys
 
+from colorama import Fore, Style
+from banner import show_banner , show_footer
+
 services = {
     21: "FTP",
     22: "SSH",
@@ -27,10 +30,7 @@ def format_date(date_value):
 
 
 def main():
-
-    print("=" * 50)
-    print("      NETWORK RECON TOOLKIT v1.5")
-    print("=" * 50)
+    show_banner()
 
     if len(sys.argv) >= 2:
         target = sys.argv[1].strip()
@@ -48,7 +48,7 @@ def main():
 
     with open(report_path, "w") as report:
 
-        report.write("NETWORK RECON TOOLKIT REPORT\n")
+        report.write("EDITH RECON REPORT\n")
         report.write("=" * 40 + "\n\n")
         report.write(f"Target: {target}\n\n")
 
@@ -138,6 +138,9 @@ def main():
                 s.close()
 
             print(f"\n[+] Report saved to: {report_path}")
+            print(Fore.CYAN + "═" * 60)
+
+            show_footer()
 
         except socket.gaierror:
             print("[-] Unable to resolve domain.")
