@@ -1,0 +1,31 @@
+EDITH RECON REPORT
+========================================
+
+Target: flipkart.com
+
+IP Address: 103.243.32.90
+
+Hostname: Reverse DNS record not found
+
+========== WHOIS ==========
+Registrar: GoDaddy.com, LLC
+Creation Date: 2007-06-03
+Expiration Date: 2027-06-03
+
+No common ports are open.
+No common ports are open.
+No common ports are open.
+No common ports are open.
+[+] Port 80/tcp OPEN (HTTP)
+
+------ Banner ------
+HTTP/1.1 301 Moved Permanently
+--------------------
+
+No common ports are open.
+No common ports are open.
+No common ports are open.
+[+] Port 443/tcp OPEN (HTTPS)
+No common ports are open.
+No common ports are open.
+No common ports are open.

@@ -1,0 +1,6 @@
+EDITH RECON REPORT
+========================================
+
+Target: scanme.nma.org
+
+Unable to resolve domain.

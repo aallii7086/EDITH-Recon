@@ -329,7 +329,7 @@ During execution, EDITH RECON automatically performs:
 
 ### 🚀 Startup Screen
 
-![Startup](screenshots/05_User_Input_Working.png)
+![User Inpit](screenshots/05_User_Input_Working.png)
 
 ---
 

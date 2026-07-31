@@ -6,16 +6,42 @@ from colorama import Fore, Style
 from banner import show_banner , show_footer
 
 services = {
+    20: "FTP-Data",
     21: "FTP",
     22: "SSH",
+    23: "Telnet",
     25: "SMTP",
     53: "DNS",
+    67: "DHCP",
+    68: "DHCP",
+    69: "TFTP",
     80: "HTTP",
     110: "POP3",
+    111: "RPC",
+    123: "NTP",
+    135: "MS RPC",
+    137: "NetBIOS",
+    138: "NetBIOS Datagram",
+    139: "NetBIOS Session",
     143: "IMAP",
+    161: "SNMP",
+    389: "LDAP",
     443: "HTTPS",
+    445: "SMB",
+    465: "SMTPS",
+    587: "SMTP Submission",
+    993: "IMAPS",
+    995: "POP3S",
+    1433: "MSSQL",
+    1521: "Oracle",
+    2049: "NFS",
     3306: "MySQL",
-    3389: "RDP"
+    3389: "RDP",
+    5432: "PostgreSQL",
+    5900: "VNC",
+    6379: "Redis",
+    8080: "HTTP-Alt",
+    8443: "HTTPS-Alt"
 }
 
 
@@ -88,19 +114,43 @@ def main():
                 report.write("WHOIS lookup failed.\n\n")
 
             # Port Scan
-            for port in range(22, 81):
+
+            print("\n========== PORT SCAN ==========")
+            print("[*] Scanning common ports...\n")
+
+            common_ports = [
+            20,21,22,23,25,
+            53,67,68,69,
+            80,110,111,123,
+            135,137,138,139,
+            143,161,389,
+            443,445,465,
+            587,993,995,
+            1433,1521,
+            2049,3306,
+            3389,5432,
+            5900,6379,
+            8080,8443
+            ]
+            found = False
+
+            for port in common_ports:
 
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.settimeout(3)
+                s.settimeout(0.5)
 
                 result = s.connect_ex((ip, port))
 
                 if result == 0:
 
+                    found = True
+
                     service = services.get(port, "Unknown")
 
                     print(f"[+] Port {port}/tcp OPEN ({service})")
                     report.write(f"[+] Port {port}/tcp OPEN ({service})\n")
+
+
 
                     # Banner Grabbing
                     if port == 80:
@@ -136,6 +186,12 @@ def main():
                             report.write(f"Banner grab failed: {e}\n")
 
                 s.close()
+
+            if not found:
+                print("[-] No common ports are open.")
+                report.write("No common ports are open.\n")
+
+            print("[+] Port scan completed.\n")
 
             print(f"\n[+] Report saved to: {report_path}")
             print(Fore.CYAN + "═" * 60)

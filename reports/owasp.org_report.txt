@@ -1,0 +1,24 @@
+EDITH RECON REPORT
+========================================
+
+Target: owasp.org
+
+IP Address: 172.66.157.115
+
+Hostname: Reverse DNS record not found
+
+========== WHOIS ==========
+Registrar: GoDaddy.com, LLC
+Creation Date: 2001-09-21
+Expiration Date: 2031-09-21
+
+[+] Port 80/tcp OPEN (HTTP)
+
+------ Banner ------
+HTTP/1.1 301 Moved Permanently
+Server: cloudflare
+--------------------
+
+[+] Port 443/tcp OPEN (HTTPS)
+[+] Port 8080/tcp OPEN (HTTP-Alt)
+[+] Port 8443/tcp OPEN (HTTPS-Alt)
