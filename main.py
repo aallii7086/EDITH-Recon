@@ -2,8 +2,10 @@ import whois
 import socket
 import sys
 
+from core.parser import TargetParser
 from colorama import Fore, Style
 from banner import show_banner , show_footer
+from modules import whois_lookup
 
 services = {
     20: "FTP-Data",
@@ -58,19 +60,20 @@ def format_date(date_value):
 def main():
     show_banner()
 
-    if len(sys.argv) >= 2:
-        target = sys.argv[1].strip()
+    parser = TargetParser()
 
+    if len(sys.argv) >= 2:
+        target = parser.parse(sys.argv[1])
     else: 
-        target = input("Enter Target: ").strip()
+        target = parser.parse(input("Enter Target:"))
 
     if not target:
         print("[-] Error: Target cannot be empty.")
         return
 
-    print(f"[+] Target Accepted: {target}")
+    print(f"[+] Target Accepted: {target.original}")
 
-    report_path = f"reports/{target}_report.txt"
+    report_path = f"reports/{target.original}_report.txt"
 
     with open(report_path, "w") as report:
 
@@ -79,7 +82,7 @@ def main():
         report.write(f"Target: {target}\n\n")
 
         try:
-            ip = socket.gethostbyname(target)
+            ip = socket.gethostbyname(target.original)
 
             print(f"[+] IP Address: {ip}\n")
             report.write(f"IP Address: {ip}\n\n")
@@ -95,24 +98,9 @@ def main():
                 print("[-] Reverse DNS record not found.\n")
                 report.write("Hostname: Reverse DNS record not found\n\n")
 
-            # WHOIS
-            try:
-                domain_info = whois.whois(target)
+            # WHOIS LOOKUP
 
-                print("========== WHOIS ==========")
-                print(f"Registrar: {domain_info.get('registrar')}")
-                print(f"Creation Date: {format_date(domain_info.get('creation_date'))}")
-                print(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}")
-
-                report.write("========== WHOIS ==========\n")
-                report.write(f"Registrar: {domain_info.get('registrar')}\n")
-                report.write(f"Creation Date: {format_date(domain_info.get('creation_date'))}\n")
-                report.write(f"Expiration Date: {format_date(domain_info.get('expiration_date'))}\n\n")
-
-            except Exception:
-                print("[-] WHOIS lookup failed.\n")
-                report.write("WHOIS lookup failed.\n\n")
-
+            whois_lookup.run(target)
             # Port Scan
 
             print("\n========== PORT SCAN ==========")
@@ -159,7 +147,7 @@ def main():
 
                             request = (
                                 f"GET / HTTP/1.1\r\n"
-                                f"Host: {target}\r\n"
+                                f"Host: {target.original}\r\n"
                                 f"Connection: close\r\n\r\n"
                             )
 

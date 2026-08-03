@@ -12,6 +12,7 @@ Registrar: DYNADOT LLC
 Creation Date: 1999-01-18
 Expiration Date: 2029-01-18
 
+[+] Port 21/tcp OPEN (FTP)
 [+] Port 22/tcp OPEN (SSH)
 [+] Port 80/tcp OPEN (HTTP)
 

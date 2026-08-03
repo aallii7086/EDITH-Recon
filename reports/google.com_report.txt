@@ -1,16 +1,11 @@
 EDITH RECON REPORT
 ========================================
 
-Target: google.com
+Target: <core.target.Target object at 0x7f65d2eca660>
 
-IP Address: 142.250.207.78
+IP Address: 192.178.173.113
 
-Hostname: pnmaaa-bd-in-f14.1e100.net
-
-========== WHOIS ==========
-Registrar: MarkMonitor, Inc.
-Creation Date: 1997-09-15
-Expiration Date: 2028-09-14
+Hostname: lcbome-in-f113.1e100.net
 
 [+] Port 80/tcp OPEN (HTTP)
 
