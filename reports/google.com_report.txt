@@ -1,11 +1,11 @@
 EDITH RECON REPORT
 ========================================
 
-Target: <core.target.Target object at 0x7f65d2eca660>
+Target: <core.target.Target object at 0x7f35b3eacad0>
 
-IP Address: 192.178.173.113
+IP Address: 142.250.146.139
 
-Hostname: lcbome-in-f113.1e100.net
+Hostname: pu-in-f139.1e100.net
 
 [+] Port 80/tcp OPEN (HTTP)
 
