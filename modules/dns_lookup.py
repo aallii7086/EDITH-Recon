@@ -15,4 +15,6 @@ def run(target):
 
     except socket.gaierror:
 
+        target.ip = None
+
         print("[-] DNS Lookup Failed\n")

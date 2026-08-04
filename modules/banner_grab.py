@@ -26,11 +26,17 @@ def run(target):
 
         first_line = response.split("\r\n")[0]
 
+        target.banner = first_line
+
         print(first_line)
+
+        target.server = None
 
         for line in response.split("\r\n"):
 
             if line.lower().startswith("server:"):
+
+                target.server = line.replace("Server:", "").strip()
 
                 print(line)
 
@@ -39,5 +45,8 @@ def run(target):
         sock.close()
 
     except Exception as e:
+
+        target.banner = None
+        target.server = None
 
         print(f"[-] Banner grab failed: {e}\n")

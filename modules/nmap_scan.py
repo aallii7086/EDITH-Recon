@@ -1,7 +1,9 @@
 import nmap
 
 
-def print_scan(scanner):
+def print_scan(scanner, target):
+
+    target.open_ports = []
 
     for host in scanner.all_hosts():
 
@@ -20,6 +22,12 @@ def print_scan(scanner):
                     print(
                         f"[+] Port {port}/{protocol} OPEN ({port_info['name']})"
                     )
+
+                    target.open_ports.append({
+                        "port": port,
+                        "protocol": protocol,
+                        "service": port_info["name"]
+                    })
 
         print()
 
@@ -54,7 +62,7 @@ def run(target, profile=None):
 
             scanner.scan(target.original, ports=ports)
 
-            print_scan(scanner)
+            print_scan(scanner, target)
 
             return "custom"
 
@@ -66,6 +74,6 @@ def run(target, profile=None):
 
     scanner.scan(target.original, arguments=profile)
 
-    print_scan(scanner)
+    print_scan(scanner, target)
 
     return profile

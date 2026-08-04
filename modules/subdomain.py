@@ -58,6 +58,8 @@ def run(target, selected_profile):
             except socket.gaierror:
                 pass
 
+        target.subdomains = found
+
         print("----------------------------------------")
         print(f"Total Subdomains Found : {len(found)}")
         print("----------------------------------------")
