@@ -1,5 +1,6 @@
 import nmap
 
+
 def print_scan(scanner):
 
     for host in scanner.all_hosts():
@@ -23,44 +24,48 @@ def print_scan(scanner):
         print()
 
 
-def run(target):
+def run(target, profile=None):
 
     print("========== NMAP SCAN ==========\n")
 
-    print("Select Port Scan Profile\n")
-
-    print("1. Top 100")
-    print("2. Top 1000")
-    print("3. Custom\n")
-
-    choice = input("Choice : ").strip()
-
     scanner = nmap.PortScanner()
 
-    if choice == "1":
+    if profile is None:
 
-        arguments = "--top-ports 100"
+        print("Select Port Scan Profile\n")
 
-    elif choice == "2":
+        print("1. Top 100")
+        print("2. Top 1000")
+        print("3. Custom\n")
 
-        arguments = "--top-ports 1000"
+        choice = input("Choice : ").strip()
 
-    elif choice == "3":
+        if choice == "1":
 
-        ports = input("Enter Ports (Example: 80,443 or 1-1000): ")
+            profile = "--top-ports 100"
 
-        scanner.scan(target.original, ports=ports)
+        elif choice == "2":
 
-        print_scan(scanner)
+            profile = "--top-ports 1000"
 
-        return
+        elif choice == "3":
 
-    else:
+            ports = input("Enter Ports (Example: 80,443 or 1-1000): ")
 
-        print("[-] Invalid Choice\n")
+            scanner.scan(target.original, ports=ports)
 
-        return
+            print_scan(scanner)
 
-    scanner.scan(target.original, arguments=arguments)
+            return "custom"
+
+        else:
+
+            print("[-] Invalid Choice\n")
+
+            return None
+
+    scanner.scan(target.original, arguments=profile)
 
     print_scan(scanner)
+
+    return profile

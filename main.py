@@ -37,13 +37,13 @@ def main():
 
     whois_lookup.run(target)
 
-    nmap_scan.run(target)
+    selected_profile = nmap_scan.run(target)
 
     banner_grab.run(target)
 
     ssl_scan.run(target)
 
-    subdomain.run(target)
+    subdomain.run(target, selected_profile)
 
     reporter.run(target)
 
