@@ -1,9 +1,19 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
+# Virtual Environment
+venv/
+.env
+
+# Reports
 reports/*
 !reports/.gitkeep
 
-screenshots/*
-!screenshots/.gitkeep
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db

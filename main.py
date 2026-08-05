@@ -12,6 +12,7 @@ from modules import banner_grab
 from modules import ssl_scan
 from modules import reporter
 from modules import subdomain
+from modules import report
 
 
 def main():
@@ -46,6 +47,13 @@ def main():
     subdomain.run(target, selected_profile)
 
     reporter.run(target)
+
+    report.run(target)
+
+    print("=" * 60)
+    print("[+] Scan Completed Successfully")
+    print("=" * 60)
+    print()
 
     show_footer()
 

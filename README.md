@@ -1,4 +1,23 @@
-<div align="center">
+# EDITH Recon
+
+> A modular Python-based reconnaissance toolkit for DNS analysis, network enumeration, SSL inspection, banner grabbing, and automated report generation.
+
+---
+
+## Features
+
+- DNS Lookup
+- Reverse DNS Lookup
+- WHOIS Lookup
+- Nmap Integration
+- Banner Grabbing
+- SSL Certificate Inspection
+- Subdomain Enumeration
+- Deep Scan (All Subdomains)
+- Deep Scan (Specific Subdomain)
+- TXT Report Generation
+- HTML Report Generation
+- Modular Architecture<div align="center">
 
 # 🛡️ EDITH RECON
 
@@ -6,10 +25,12 @@
 
 *A Python-based Network Recon & Intelligence Toolkit for ethical reconnaissance and automated reporting.*
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
-![Platform](https://img.shields.io/badge/Platform-Kali%20Linux-green?style=for-the-badge&logo=linux)
-![Status](https://img.shields.io/badge/Status-Stable-success?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-v1.0.0-orange?style=for-the-badge)
+# EDITH Recon
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Linux-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-v1.1.0-orange)
 
 Developed with ❤️ by **Aliraza**
 
@@ -413,3 +434,309 @@ If you found this project useful, consider giving it a ⭐ on GitHub.
 Feedback and suggestions are always welcome.
 
 ---
+
+---
+
+## Project Overview
+
+EDITH Recon is designed to automate the early stages of reconnaissance by collecting publicly available information about a target domain.
+
+The project follows a modular architecture where every feature is isolated into its own module, making it easier to maintain and extend.
+
+---
+
+## Architecture
+
+```
+                User Input
+                     │
+                     ▼
+             Target Validation
+                     │
+                     ▼
+              DNS Resolution
+                     │
+                     ▼
+              Reverse DNS
+                     │
+                     ▼
+                 WHOIS Lookup
+                     │
+                     ▼
+                 Nmap Scanner
+                     │
+                     ▼
+              Banner Grabbing
+                     │
+                     ▼
+              SSL Inspection
+                     │
+                     ▼
+         Subdomain Enumeration
+                     │
+                     ▼
+             Deep Subdomain Scan
+                     │
+                     ▼
+          TXT & HTML Report Generation
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/EDITH-Recon.git
+```
+
+Go inside the project
+
+```bash
+cd EDITH-Recon
+```
+
+Create Virtual Environment
+
+```bash
+python3 -m venv venv
+```
+
+Activate
+
+Linux
+
+```bash
+source venv/bin/activate
+```
+
+Windows
+
+```powershell
+venv\Scripts\activate
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Usage
+
+Interactive Mode
+
+```bash
+python3 main.py
+```
+
+Command Line Mode
+
+```bash
+python3 main.py google.com
+```
+
+---
+
+## Scan Workflow
+
+```
+Target
+   │
+   ▼
+DNS Lookup
+   │
+   ▼
+Reverse DNS
+   │
+   ▼
+WHOIS
+   │
+   ▼
+Nmap Scan
+   │
+   ▼
+Banner Grab
+   │
+   ▼
+SSL Inspection
+   │
+   ▼
+Subdomain Enumeration
+   │
+   ▼
+Deep Scan
+   │
+   ▼
+Reports
+```
+
+---
+
+## Report Generation
+
+EDITH automatically generates:
+
+- Text Report (.txt)
+- HTML Report (.html)
+
+Reports include:
+
+- Target Information
+- DNS Information
+- WHOIS Details
+- Open Ports
+- Banner Information
+- SSL Certificate Details
+- Enumerated Subdomains
+- Scan Summary
+
+---
+
+## Project Structure
+
+```
+EDITH-Recon
+│
+├── core/
+├── modules/
+├── data/
+├── docs/
+├── reports/
+├── screenshots/
+│
+├── main.py
+├── banner.py
+├── config.py
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
+---
+
+## Modules
+
+| Module | Description |
+|---------|-------------|
+| DNS | Resolves Domain to IP |
+| Reverse DNS | Resolves IP to Hostname |
+| WHOIS | Retrieves Domain Registration Information |
+| Nmap | Port Scanning |
+| Banner Grab | Retrieves HTTP Banner |
+| SSL | Extracts SSL Certificate Information |
+| Subdomain | Enumerates Subdomains |
+| Reporter | Generates TXT Report |
+| HTML Report | Generates HTML Report |
+
+---
+
+## Screenshots
+
+Project setup
+
+```
+screenshots/
+```
+
+Suggested screenshots
+
+- Main Scan
+- Subdomain Enumeration
+- Deep Scan
+- HTML Report
+- Generated TXT Report
+- Final Output
+
+---
+
+## Technologies Used
+
+- Python 3
+- python-nmap
+- python-whois
+- socket
+- ssl
+- HTML
+- CSS
+
+---
+
+## Requirements
+
+- Python 3.10+
+- Nmap Installed
+- Internet Connection
+
+---
+
+## Version
+
+Current Release
+
+```
+v1.1.0
+```
+
+---
+
+## Roadmap
+
+### Completed
+
+- DNS Lookup
+- Reverse DNS
+- WHOIS
+- Nmap
+- Banner Grab
+- SSL Scanner
+- Subdomain Enumeration
+- Deep Scan
+- TXT Report
+- HTML Report
+
+### Planned (v1.2)
+
+- JSON Report Export
+- PDF Report Export
+- DNS Record Enumeration
+- HTTP Header Analysis
+- Shodan Integration
+- VirusTotal Integration
+- OSINT Modules
+- Multi-threaded Enumeration
+
+---
+
+## Disclaimer
+
+This project is intended for educational purposes and authorized security assessments only.
+
+Always obtain proper permission before scanning any target.
+
+The author is not responsible for misuse of this tool.
+
+---
+
+## License
+
+MIT License
+
+---
+
+## Author
+
+**Mohammad Aliraza**
+
+Computer Engineering Graduate
+
+Cybersecurity Enthusiast
+
+---
+
+# EDITH Recon v1.1.0
+
+**Stay Curious. Stay Ethical.**
